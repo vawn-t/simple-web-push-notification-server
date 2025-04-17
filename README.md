@@ -49,13 +49,10 @@ The server will start on port 3000 (or the port specified in the PORT environmen
 Integration with Your Web Application
 Register a Service Worker in your web application that can receive push notifications.
 
-Get the VAPID public key from this server via the `/api/vapid-public-key` endpoint.
-
-Subscribe to push notifications using the public key and the browser's Push API.
-
-Send the subscription details to this server via the /api/subscribe endpoint.
-
-Send push notifications by making POST requests to the /api/send-notification endpoint.
+- Get the VAPID public key from this server via the `/api/vapid-public-key` endpoint.
+- Subscribe to push notifications using the public key and the browser's Push API.
+- Send the subscription details to this server via the /api/subscribe endpoint.
+- Send push notifications by making POST requests to the /api/send-notification endpoint.
 
 ## API Details
 
@@ -82,6 +79,7 @@ POST /api/subscribe
 ```
 
 Registers a new push notification subscription.
+
 **Request Body:**
 
 ```json
@@ -97,18 +95,18 @@ Registers a new push notification subscription.
 
 **Response:**
 
-```
+```json
 {
-"success": true,
-"message": "Subscription added successfully"
+	"success": true,
+	"message": "Subscription added successfully"
 }
 ```
 
 Send Notification to All Subscribers
 
-````
-POST /api/send-notification```
-````
+```
+POST /api/send-notification
+```
 
 Sends a push notification to all registered subscribers.
 
@@ -160,35 +158,36 @@ Sends a push notification to a specific subscriber identified by their endpoint.
 
 **Response:**
 
-```
+```json
 {
-  "success": true,
-  "message": "Notification sent successfully"
+	"success": true,
+	"message": "Notification sent successfully"
 }
 ```
 
 Returns a list of all registered subscriptions (for debugging purposes).
+
 **Response:**
 
-```
+```json
 {
-  "count": 2,
-  "subscriptions": [
-    {
-      "endpoint": "https://fcm.googleapis.com/fcm/send/example-endpoint-1",
-      "keys": {
-        "p256dh": "ABCDEFGHIJ...",
-        "auth": "ABCDE..."
-      }
-    },
-    {
-      "endpoint": "https://fcm.googleapis.com/fcm/send/example-endpoint-2",
-      "keys": {
-        "p256dh": "KLMNOPQRST...",
-        "auth": "FGHIJ..."
-      }
-    }
-  ]
+	"count": 2,
+	"subscriptions": [
+		{
+			"endpoint": "https://fcm.googleapis.com/fcm/send/example-endpoint-1",
+			"keys": {
+				"p256dh": "ABCDEFGHIJ...",
+				"auth": "ABCDE..."
+			}
+		},
+		{
+			"endpoint": "https://fcm.googleapis.com/fcm/send/example-endpoint-2",
+			"keys": {
+				"p256dh": "KLMNOPQRST...",
+				"auth": "FGHIJ..."
+			}
+		}
+	]
 }
 ```
 
